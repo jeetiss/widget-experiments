@@ -1,19 +1,23 @@
 import html from "../utils/html";
 
 class Hello {
-  constructor(element) {
-    this.element = element;
-    this.markup = html`
+  constructor(options, element) {
+    this.$element = element;
+    this.$markup = this.render();
+  }
+
+  render() {
+    return html`
       <h1>HELLO WORLD</h1>
     `;
   }
 
   mount() {
-    this.element.appendChild(this.markup);
+    this.$element.appendChild(this.$markup);
   }
 
   unmount() {
-    this.markup.remove();
+    this.$markup.remove();
   }
 }
 
