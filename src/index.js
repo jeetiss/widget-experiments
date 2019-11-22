@@ -20,7 +20,6 @@ class Hello {
   }
 }
 
-
 class Counter {
   constructor(element, value = WatchedValue(0)) {
     this.element = element;
@@ -71,8 +70,6 @@ class Counter {
 class Tabs {
   constructor(element, tabs) {
     this.$element = element;
-    this.tabs = tabs
-
     this.activeTabIndex = WatchedValue(0);
 
     this.$markup = html`
@@ -91,7 +88,8 @@ class Tabs {
     this.$container = this.$markup.querySelector(".js-content");
     this.$tabs = this.$markup.querySelector(".js-tabs");
 
-    this.activeTab = this.tabs[0][1](this.$container);
+    this.tabs = tabs.map(([_, ctr]) => ctr(this.$container));
+    this.activeTab = this.tabs[0];
   }
 
   mount() {
@@ -101,13 +99,12 @@ class Tabs {
     this.subscriptions = [
       this.activeTabIndex.subscribe(index => {
         this.activeTab.unmount();
-        this.activeTab = this.tabs[index][1](this.$container);
+        this.activeTab = this.tabs[index];
         this.activeTab.mount();
       }),
 
       listen(this.$tabs, "click", e => {
         if (e.target.dataset && "index" in e.target.dataset) {
-          console.log('click', Number.parseInt(e.target.dataset.index))
           this.activeTabIndex.value = Number.parseInt(e.target.dataset.index);
         }
       })
