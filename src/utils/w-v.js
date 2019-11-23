@@ -4,6 +4,7 @@ const WatchedValue = initial => {
   let watchers = [];
 
   const fire = value => watchers.forEach(fn => fn(value));
+  
   const unsubscribe = (fn) => {
     watchers = watchers.filter(f => f !== fn);
   };
