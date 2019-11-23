@@ -1,6 +1,6 @@
 import WatchedValue from "./utils/w-v";
 
-import { Hello, Counter, Tabs, LocalesExample } from "./components";
+import { Hello, Counter, Tabs, BindedInput } from "./components";
 
 let root = document.querySelector("#root");
 
@@ -16,7 +16,7 @@ let tabs = new Tabs(
         "Global Counter",
         element => new Counter({ locale, value: gl }, element)
       ],
-      ["Locales Example", element => new LocalesExample({ locale }, element)]
+      ["Input", element => new BindedInput({}, element)]
     ]
   },
   root
