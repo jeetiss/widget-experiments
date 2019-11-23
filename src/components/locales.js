@@ -11,7 +11,7 @@ class LocalesExample {
 
   render() {
     return html`
-      <h1>${this.locale.value.header}</h1>
+      <h1>${this.locale.value().header}</h1>
     `;
   }
 

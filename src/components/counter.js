@@ -22,7 +22,7 @@ class Counter {
         <div>
           Value:
 
-          <span class="js-val">${this.counter.value}</span>
+          <span class="js-val">${this.counter.value()}</span>
         </div>
 
         <div>
@@ -41,8 +41,8 @@ class Counter {
 
     this.subscriptions = [
       this.counter.subscribe(value => (this.$valElement.textContent = value)),
-      listen(this.$increment, "click", () => (this.counter.value += 1)),
-      listen(this.$decrement, "click", () => (this.counter.value -= 1))
+      listen(this.$increment, "click", () => this.counter.value(this.counter.value() + 1)),
+      listen(this.$decrement, "click", () => this.counter.value(this.counter.value() - 1))
     ];
   }
 

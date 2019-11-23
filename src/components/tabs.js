@@ -46,7 +46,7 @@ class Tabs {
       }),
       listen(this.$tabs, "click", e => {
         if (e.target.dataset && "index" in e.target.dataset) {
-          this.activeTabIndex.value = Number.parseInt(e.target.dataset.index);
+          this.activeTabIndex.value(Number.parseInt(e.target.dataset.index))
         }
       })
     ];
