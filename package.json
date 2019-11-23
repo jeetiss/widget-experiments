@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^24.9.0",
-    "jest-esm-jsx-transform": "^1.0.0",
+    "jest": "24.9.0",
+    "jest-esm-jsx-transform": "1.0.0",
     "parcel": "2.0.0-alpha.3.2"
   },
   "jest": {
