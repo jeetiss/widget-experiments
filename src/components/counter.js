@@ -2,13 +2,6 @@ import html from "../utils/html";
 import listen from "../utils/listen";
 import WatchedValue from "../utils/w-v";
 
-let translations = {
-  counter: "Counter example",
-  value: "Value:",
-  increment: "Increment",
-  decrement: "Decrement"
-};
-
 class Counter {
   constructor({ value = WatchedValue(0) }, element) {
     this.$element = element;
