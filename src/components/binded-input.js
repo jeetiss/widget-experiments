@@ -4,7 +4,7 @@ import { Input } from "./input";
 
 class BindedInput {
   constructor({}, element) {
-    this.value = WatchedValue("");
+    this.value = WatchedValue("Binded input");
 
     this.$element = element;
     this.$markup = this.render();

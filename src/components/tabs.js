@@ -2,6 +2,8 @@ import html from "../utils/html";
 import listen from "../utils/listen";
 import WatchedValue from "../utils/w-v";
 
+import "./tabs.css";
+
 class Tabs {
   constructor({ tabs }, element) {
     this.$element = element;
@@ -21,15 +23,16 @@ class Tabs {
     let { tabNames } = this;
 
     return html`
-      <div>
-        <ul class="js-tabs">
+      <div class="tabs">
+        <ul class="tabs-controls js-tabs">
           ${tabNames.map(
             (text, index) =>
-              `<li><button data-index=${index}>${text}</button></li>`
+              `<li><button class='${index === this.activeTabIndex.value() &&
+                "is-active"}' data-index=${index}>${text}</button></li>`
           )}
         </ul>
 
-        <div class="js-content"></div>
+        <div class="tabs-content js-content"></div>
       </div>
     `;
   }
@@ -44,9 +47,20 @@ class Tabs {
         this.activeTab = this.tabs[index];
         this.activeTab.mount();
       }),
+
+      this.activeTabIndex.subscribe(activeIndex => {
+        Array.from(
+          this.$tabs.querySelectorAll("button")
+        ).forEach(($button, index) =>
+          index === activeIndex
+            ? $button.classList.add("is-active")
+            : $button.classList.remove("is-active")
+        );
+      }),
+
       listen(this.$tabs, "click", e => {
         if (e.target.dataset && "index" in e.target.dataset) {
-          this.activeTabIndex.value(Number.parseInt(e.target.dataset.index))
+          this.activeTabIndex.value(Number.parseInt(e.target.dataset.index));
         }
       })
     ];
@@ -55,6 +69,8 @@ class Tabs {
   unmount() {
     this.activeTab.unmount();
     this.$markup.remove();
+
+    this.subscriptions.forEach(fn => fn());
   }
 }
 
