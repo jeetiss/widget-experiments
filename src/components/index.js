@@ -5,3 +5,4 @@ export * from "./locales";
 export * from "./input";
 export * from "./binded-input";
 export * from "./form";
+export * from "./lazy";
