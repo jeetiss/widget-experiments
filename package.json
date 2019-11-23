@@ -2,9 +2,10 @@
   "name": "widget-experiments",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "dev": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "keywords": [],
@@ -19,5 +20,8 @@
     "transform": {
       "\\.js$": "jest-esm-jsx-transform"
     }
+  },
+  "dependencies": {
+    "is-url": "^1.2.4"
   }
 }
