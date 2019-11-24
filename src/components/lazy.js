@@ -17,8 +17,6 @@ class Lazy {
   }
 
   render() {
-    const state = this.state;
-
     if (this.comp == null) {
       return html`
         <div>Loading...</div>
