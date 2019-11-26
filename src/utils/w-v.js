@@ -28,4 +28,48 @@ const WatchedValue = initial => {
   };
 };
 
+let computed = (fn, ...watched) => {
+  let getValues = () => watched.map(value => value.value());
+  let _computed = WatchedValue(fn(...getValues()));
+
+  let watchers = [];
+  let off = null;
+
+  let fire = value => watchers.forEach(fn => fn(value));
+  let on = () => {
+    let unsub = watched.map(w =>
+      w.subscribe(() => {
+        fire(_computed.value(fn(...getValues())));
+      })
+    );
+
+    return () => unsub.forEach(fn => fn());
+  };
+
+  let unsubscribe = fn => {
+    watchers = watchers.filter(f => f !== fn);
+
+    if (watchers.length === 0 && off) {
+      off();
+    }
+  };
+
+  return {
+    value: _computed.value,
+
+    subscribe: fn => {
+      watchers.push(fn);
+
+      if (watchers.length === 1) {
+        off = on();
+      }
+
+      return () => unsubscribe(fn);
+    },
+
+    unsubscribe
+  };
+};
+
+export { computed };
 export default WatchedValue;
