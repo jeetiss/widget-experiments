@@ -7,7 +7,7 @@ import "./tabs.css";
 class Tabs {
   constructor({ tabs }, element) {
     this.$element = element;
-    this.activeTabIndex = WatchedValue(0);
+    this.activeTabIndex = WatchedValue(tabs.length - 1);
     this.tabNames = tabs.map(([text]) => text);
 
     this.$markup = this.render();
@@ -16,7 +16,7 @@ class Tabs {
     this.$tabs = this.$markup.querySelector(".js-tabs");
 
     this.tabs = tabs.map(([_, ctr]) => ctr(this.$container));
-    this.activeTab = this.tabs[0];
+    this.activeTab = this.tabs[this.activeTabIndex.value()];
   }
 
   render() {

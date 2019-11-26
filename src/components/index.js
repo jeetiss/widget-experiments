@@ -6,3 +6,4 @@ export * from "./input";
 export * from "./binded-input";
 export * from "./form";
 export * from "./lazy";
+export * from "./uploader";

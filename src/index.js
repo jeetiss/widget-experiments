@@ -1,6 +1,6 @@
 import WatchedValue from "./utils/w-v";
 
-import { Hello, Counter, Tabs, BindedInput, UrlForm, Lazy } from "./components";
+import { Hello, Counter, Tabs, BindedInput, UrlForm, Lazy, Uploader } from "./components";
 
 let root = document.querySelector("#root");
 let locale = WatchedValue({ header: "Привет Мир" });
@@ -18,7 +18,8 @@ let tabs = new Tabs(
       ["Counter", element => new Counter({ locale }, element)],
       ["Input", element => new BindedInput({}, element)],
       ["Url Form", element => new UrlForm({}, element)],
-      ["React ⚛️", react]
+      ["React ⚛️", react],
+      ["Uploader", element => new Uploader({}, element)]
     ]
   },
   root
